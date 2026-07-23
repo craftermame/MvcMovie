@@ -7,14 +7,17 @@ public class HelloWorldController : Controller
 {
     //
     // GET: /HelloWorld/
-    public string index()
+    public IActionResult Index()
     {
-        return "This is my default action...";
+        return View(); // a method from super class
     }
     //
     // GET: /HelloWorld/Welcome/
-    public string Welcome(string name, int ID = 1)
+    public IActionResult Welcome(string name, int numTimes = 1)
     {
-        return HtmlEncoder.Default.Encode($"Hello {name}, ID: {ID}");
+        // ViewData injection is one of the responsibility of Controller Layer
+        ViewData["Message"] = "Hello" + name;
+        ViewData["NumTimes"] = numTimes;
+        return View();
     }
 }
